@@ -406,7 +406,9 @@ static int set_time_to_gps_time(rf_uhd_handler_t* handler)
     return UHD_ERROR_NONE;
   }
 
-  uhd::sensor_value_t gps_nmea = handler->uhd->get_sensor("gps_gpgga");
+//   uhd::sensor_value_t gps_nmea = handler->uhd->get_sensor("gps_gpgga");
+  uhd::sensor_value_t gps_nmea;
+  handler->uhd->get_sensor("gps_gpgga", gps_nmea);
   FILE *f;
   f = fopen("/var/log/enb_gga.log", "w");
   fprintf(f, "%s\n", gps_nmea.to_pp_string().c_str());
